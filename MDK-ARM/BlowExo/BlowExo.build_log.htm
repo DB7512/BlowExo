@@ -21,13 +21,20 @@ Target DLL:      STLink\ST-LINKIII-KEIL_SWO.dll V3.0.9.0
 Dialog DLL:      TCM.DLL V1.53.0.0
  
 <h2>Project:</h2>
-E:\HUA\01_Doctor\01_Research\03_Exoskeleton_Robot\04_Control\BlowExo\MDK-ARM\BlowExo.uvprojx
-Project File Date:  04/29/2024
+E:\HUA\01_Doctor\01_Research\03_Exoskeleton_Robot\04_Control\02_MotorControl\BlowExoRep\BlowExo\MDK-ARM\BlowExo.uvprojx
+Project File Date:  05/06/2024
 
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 7 (build 960)', folder: 'D:\Keil_v5\ARM\ARMCC\Bin'
 Build target 'BlowExo'
-"BlowExo\BlowExo.axf" - 0 Error(s), 0 Warning(s).
+compiling GO-M8010-6.c...
+..\Core\Src\GO-M8010-6.c(84): warning:  #181-D: argument is incompatible with corresponding format string conversion
+          printf("motororri %lf \n", motor_r->motor_recv_data.fbk.pos);
+..\Core\Src\GO-M8010-6.c: 1 warning, 0 errors
+linking...
+Program Size: Code=18850 RO-data=1250 RW-data=28 ZI-data=2268  
+FromELF: creating hex file...
+"BlowExo\BlowExo.axf" - 0 Error(s), 1 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -51,7 +58,7 @@ Package Vendor: Keil
 
    * Component: ARM::CMSIS:CORE:5.5.0
       Include file:  CMSIS\Core\Include\tz_context.h
-Build Time Elapsed:  00:00:00
+Build Time Elapsed:  00:00:02
 </pre>
 </body>
 </html>

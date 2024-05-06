@@ -18,6 +18,7 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include "tim.h"
 #include "usart.h"
 #include "gpio.h"
 
@@ -98,6 +99,7 @@ int main(void)
   MX_USART1_UART_Init();
   MX_USART2_UART_Init();
   MX_USART3_UART_Init();
+  MX_TIM2_Init();
   /* USER CODE BEGIN 2 */
   /* 电机的当前参数 */
   uint8_t motor_sta = 0;            // 电机状态，0：停止，1：运动
@@ -114,62 +116,48 @@ int main(void)
 //    printf("MOTOR0 %f \n", motor_speed_rad);
 //  }
   
-  float pos = -1;
+  float pos = 0;
   float delta = -0.005;
   int count = 0;
   
-//  cmd.id=0;           //给电机控制指令结构体赋值
-//  cmd.mode=1;
-//  cmd.T=0;
-//  cmd.W=0;
-//  cmd.Pos=0;
-//  cmd.K_P=0;
-//  cmd.K_W=0;
+  cmd.id=0;           //给电机控制指令结构体赋值
+  cmd.mode=1;
+  cmd.T=0;
+  cmd.W=-10;
+  cmd.Pos=0;
+  cmd.K_P=0;
+  cmd.K_W=0.05;
   
 
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-    HAL_Delay(2000);
-    pos = 1;
   while (1)
   {
-
-    cmd.id=0;           //给电机控制指令结构体赋值
-    cmd.mode=1;
-    cmd.T=0;
-    cmd.W=0;
-    cmd.Pos  = pos * 6.33;
-    cmd.K_P=0.1;
-    cmd.K_W=0.01;
+//    cmd.id=0;           //给电机控制指令结构体赋值
+//    cmd.mode=1;
+//    cmd.T=0;
+//    cmd.W=0;
+//    cmd.Pos = pos * 6.33;
+//    cmd.K_P=0.1;
+//    cmd.K_W=0.01;
     /* 电机控制 --------------------------------------------------------------------------*/
-    SERVO_Send_recv(&cmd, &data);     //将控制指令发送给电机，同时接收返回值
+    if(SERVO_Send_recv(&cmd, &data) == HAL_OK)     //将控制指令发送给电机，同时接收返回值
+    {
+      printf("motor recev ok \n");
+    }
+    else
+    {
+      printf("motor recev error \n");
+    }
     motor_position_rad = data.Pos;
-    printf("Motor %f \n", data.Pos);
-    printf("MOTOR %f \n", data.W);
-    HAL_Delay(1);
+    printf("MotorPos %f \n", data.Pos);
+    printf("MOTORspeed %f \n", data.W);
+    HAL_Delay(2);
     HAL_GPIO_TogglePin(LD3_GPIO_Port,LD3_Pin);
     count++;
-    HAL_Delay(2000);
-    pos = -pos;
-//    pos = pos + delta;
-    if(count == 440)
-    {
-    delta = 0.005;
-    HAL_Delay(1000);
-//        cmd.Pos=0;
-//        cmd.T=0;
-//        cmd.W=0;
-//        cmd.K_P=0;
-//        cmd.K_W=0;
-//        count=0;
-    }
-    if(count == 600) {
-    delta = -0.005;
-    HAL_Delay(1000);
-    }
-    if(count == 700)
+    if(count == 600)
     {
         cmd.Pos=0;
         cmd.T=0;
@@ -178,7 +166,6 @@ int main(void)
         cmd.K_W=0;
         count=0;
     }
-
     /* RLS编码器通信 ---------------------------------------------------------------------*/
     Encoder_Send_recv(&blow_position);
     printf("RLS %d \n", blow_position);
@@ -260,10 +247,17 @@ void SystemClock_Config(void)
 /* 回调函数 ------------------------------------------------------*/
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 {
-  if(huart->Instance==USART2)
+  if(huart->Instance==USART1)
   {
-    
-    
+//     uint8_t *rp = (uint8_t *)&data.motor_recv_data;
+//     if(rp[0] == 0xFD && rp[1] == 0xEE)
+//     {
+//       data.correct = 1;
+//       extract_data(&data);
+//     }
+  }
+  else if(huart->Instance==USART2)
+  {
     
   }
   else if(huart->Instance==USART3)
