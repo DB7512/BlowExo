@@ -38,12 +38,12 @@ void MX_TIM2_Init(void)
   TIM_MasterConfigTypeDef sMasterConfig = {0};
 
   /* USER CODE BEGIN TIM2_Init 1 */
-
+  // 200Hz->4999,100Hz->9999,50Hz->19999
   /* USER CODE END TIM2_Init 1 */
   htim2.Instance = TIM2;
   htim2.Init.Prescaler = 53;
   htim2.Init.CounterMode = TIM_COUNTERMODE_UP;
-  htim2.Init.Period = 999;
+  htim2.Init.Period = 49999;
   htim2.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
   htim2.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
   if (HAL_TIM_Base_Init(&htim2) != HAL_OK)
@@ -77,10 +77,6 @@ void HAL_TIM_Base_MspInit(TIM_HandleTypeDef* tim_baseHandle)
   /* USER CODE END TIM2_MspInit 0 */
     /* TIM2 clock enable */
     __HAL_RCC_TIM2_CLK_ENABLE();
-
-    /* TIM2 interrupt Init */
-    HAL_NVIC_SetPriority(TIM2_IRQn, 2, 0);
-    HAL_NVIC_EnableIRQ(TIM2_IRQn);
   /* USER CODE BEGIN TIM2_MspInit 1 */
 
   /* USER CODE END TIM2_MspInit 1 */

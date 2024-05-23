@@ -34,5 +34,9 @@ blowexo\rls_encoder.o: ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_tim.h
 blowexo\rls_encoder.o: ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_tim_ex.h
 blowexo\rls_encoder.o: ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart.h
 blowexo\rls_encoder.o: ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart_ex.h
+blowexo\rls_encoder.o: ../Core/Inc/motor_control.h
+blowexo\rls_encoder.o: ../Core/Inc/main.h
+blowexo\rls_encoder.o: ../Core/Inc/ris_protocol.h
+blowexo\rls_encoder.o: ../Core/Inc/RLS_encoder.h
 blowexo\rls_encoder.o: ../Core/Inc/usart.h
 blowexo\rls_encoder.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h

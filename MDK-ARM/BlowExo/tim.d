@@ -34,3 +34,7 @@ blowexo\tim.o: ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_tim.h
 blowexo\tim.o: ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_tim_ex.h
 blowexo\tim.o: ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart.h
 blowexo\tim.o: ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart_ex.h
+blowexo\tim.o: ../Core/Inc/motor_control.h
+blowexo\tim.o: ../Core/Inc/main.h
+blowexo\tim.o: ../Core/Inc/ris_protocol.h
+blowexo\tim.o: ../Core/Inc/RLS_encoder.h

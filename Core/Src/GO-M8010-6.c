@@ -68,7 +68,7 @@ int extract_data(MOTOR_recv *motor_r)
 {
     if(motor_r->motor_recv_data.CRC16 !=
         crc_ccitt(0, (uint8_t *)&motor_r->motor_recv_data, 14)){
-        // printf("[WARNING] Receive data CRC error");
+        printf("[WARNING] Receive data CRC error \n");
         motor_r->correct = 0;
         return motor_r->correct;
     }
@@ -78,11 +78,9 @@ int extract_data(MOTOR_recv *motor_r)
         motor_r->mode = motor_r->motor_recv_data.mode.status;
         motor_r->Temp = motor_r->motor_recv_data.fbk.temp;
         motor_r->MError = motor_r->motor_recv_data.fbk.MError;
-        motor_r->W = ((float)motor_r->motor_recv_data.fbk.speed/256)*6.2832f ;
-        motor_r->T = ((float)motor_r->motor_recv_data.fbk.torque) / 256;
-        motor_r->Pos = 6.2832f*((float)motor_r->motor_recv_data.fbk.pos) / 32768;
-        printf("motororri %lf \n", motor_r->motor_recv_data.fbk.pos);
-        printf("motor %f \n", motor_r->Pos);
+        motor_r->W = ((float)motor_r->motor_recv_data.fbk.speed/256)*6.2832f;       // rad/s
+        motor_r->T = ((float)motor_r->motor_recv_data.fbk.torque) / 256;            // Nm
+        motor_r->Pos = 6.2832f*((float)motor_r->motor_recv_data.fbk.pos) / 32768;   // rad
         motor_r->footForce = motor_r->motor_recv_data.fbk.force;
         motor_r->correct = 1;
         return motor_r->correct;
@@ -99,19 +97,9 @@ HAL_StatusTypeDef SERVO_Send_recv(MOTOR_send *pData, MOTOR_recv *rData)
     SET_485_RE_UP();
     HAL_UART_Transmit(&huart1, (uint8_t *)pData, sizeof(pData->motor_send_data), 10); 
 
-
     SET_485_RE_DOWN();
     SET_485_DE_DOWN();
     HAL_UARTEx_ReceiveToIdle(&huart1, (uint8_t *)rData, sizeof(rData->motor_recv_data), &rxlen, 10);
-//    if(HAL_UART_Receive_IT(&huart1, (uint8_t *)rData, sizeof(rData->motor_recv_data)) == HAL_OK)
-//    {
-//      return HAL_OK;
-//    }
-//    else
-//    {
-//      return HAL_ERROR;
-//    }
-
 
     if(rxlen == 0)
 
@@ -129,4 +117,14 @@ HAL_StatusTypeDef SERVO_Send_recv(MOTOR_send *pData, MOTOR_recv *rData)
     }
     
     return HAL_ERROR;
+    
+//    if(HAL_UARTEx_ReceiveToIdle_IT(&huart1, (uint8_t *)rData, sizeof(rData->motor_recv_data)) == HAL_OK)
+////    if(HAL_UART_Receive_IT(&huart1, (uint8_t *)rData, sizeof(rData->motor_recv_data)) == HAL_OK)
+//    {
+//      return HAL_OK;
+//    }
+//    else
+//    {
+//      return HAL_ERROR;
+//    }
 }

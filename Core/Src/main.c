@@ -24,8 +24,6 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "motor_control.h"
-#include "RLS_encoder.h"
 #include "stdio.h"
 /* USER CODE END Includes */
 
@@ -50,11 +48,20 @@
 MOTOR_send cmd;             // 以全局变量声明电机控制结构体和电机数据结构体，方便在故障时通过debug查看变量值
 MOTOR_recv data;
 int blow_position = 0;      // RLS编码器位置
+int count = 0;
+int usart1_sta = 0;
+
+int motor_sta = 0;          // 电机状态，0：无数据，1：有数据
+int rls_sta = 0;            // 编码器状态，0：无数据，1：有数据
+int motor_error_count = 0;  // 电机错误次数，累计到10次报错
+int motor_data_sta = 0;     // 电机参数解析状态，即motor_r->correct的全局变量，0：解析错误，1：解析成功
+int rls_error_count = 0;    // 编码器错误次数，累积到10次报错
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 static void MPU_Config(void);
+static void MX_NVIC_Init(void);
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
@@ -100,9 +107,11 @@ int main(void)
   MX_USART2_UART_Init();
   MX_USART3_UART_Init();
   MX_TIM2_Init();
+
+  /* Initialize interrupts */
+  MX_NVIC_Init();
   /* USER CODE BEGIN 2 */
   /* 电机的当前参数 */
-  uint8_t motor_sta = 0;            // 电机状态，0：停止，1：运动
   float motor_position_rad = 0.0;   // 电机位置（rad）
   float motor_speed_rad = 0.0;      // 电机速度（rad/s）
   /* 关节的当前参数 */
@@ -110,15 +119,16 @@ int main(void)
   float blow_speed_rad = 0.0;       // 肘关节速度（rad/s）
   
   /* 获取电机当前信息 */
-//  if(motor_sta != 1)
-//  {
-//    Servo_Inquire(&motor_position_rad, &motor_speed_rad);
-//    printf("MOTOR0 %f \n", motor_speed_rad);
-//  }
+  if(motor_sta != 1)
+  {
+    /** 设置电机工作模式，仅初始查询电机参数
+    */
+    Servo_Inquire(&motor_position_rad, &motor_speed_rad);
+//    printf("motorpos %f \n", data.Pos);
+  }
   
   float pos = 0;
   float delta = -0.005;
-  int count = 0;
   
   cmd.id=0;           //给电机控制指令结构体赋值
   cmd.mode=1;
@@ -127,6 +137,9 @@ int main(void)
   cmd.Pos=0;
   cmd.K_P=0;
   cmd.K_W=0.05;
+
+
+  HAL_TIM_Base_Start_IT(&htim2);    // 开启定时器中断
   
 
   /* USER CODE END 2 */
@@ -135,48 +148,12 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-//    cmd.id=0;           //给电机控制指令结构体赋值
-//    cmd.mode=1;
-//    cmd.T=0;
-//    cmd.W=0;
-//    cmd.Pos = pos * 6.33;
-//    cmd.K_P=0.1;
-//    cmd.K_W=0.01;
-    /* 电机控制 --------------------------------------------------------------------------*/
-    if(SERVO_Send_recv(&cmd, &data) == HAL_OK)     //将控制指令发送给电机，同时接收返回值
+    if(motor_error_count > 10)
     {
-      printf("motor recev ok \n");
+      printf("motor error \n");
+      Error_Handler();
     }
-    else
-    {
-      printf("motor recev error \n");
-    }
-    motor_position_rad = data.Pos;
-    printf("MotorPos %f \n", data.Pos);
-    printf("MOTORspeed %f \n", data.W);
-    HAL_Delay(2);
-    HAL_GPIO_TogglePin(LD3_GPIO_Port,LD3_Pin);
-    count++;
-    if(count == 600)
-    {
-        cmd.Pos=0;
-        cmd.T=0;
-        cmd.W=0;
-        cmd.K_P=0;
-        cmd.K_W=0;
-        count=0;
-    }
-    /* RLS编码器通信 ---------------------------------------------------------------------*/
-    Encoder_Send_recv(&blow_position);
-    printf("RLS %d \n", blow_position);
-//    HAL_Delay(5);
-    HAL_GPIO_TogglePin(LD2_GPIO_Port,LD2_Pin);
-//    HAL_Delay(5);
-    //  HAL_UART_Transmit(&huart2, (uint8_t *)&blow_position, sizeof(blow_position),10);
-    if(HAL_UART_Transmit(&huart2, (uint8_t *)&blow_position, sizeof(blow_position), 10) == HAL_OK)
-    {
-      HAL_GPIO_TogglePin(LD1_GPIO_Port,LD1_Pin);
-    }
+    
 
     /* USER CODE END WHILE */
 
@@ -242,29 +219,108 @@ void SystemClock_Config(void)
   }
 }
 
-/* USER CODE BEGIN 4 */
+/**
+  * @brief NVIC Configuration.
+  * @retval None
+  */
+static void MX_NVIC_Init(void)
+{
+  /* TIM2_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(TIM2_IRQn, 2, 0);
+  HAL_NVIC_EnableIRQ(TIM2_IRQn);
+}
 
-/* 回调函数 ------------------------------------------------------*/
+/* USER CODE BEGIN 4 */
+/* 定时器中断回调函数 ----------------------------------------------------*/
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
+{
+  if(htim->Instance == TIM2)
+  {
+    /** 查询电机参数
+    */
+    modify_data(&cmd);
+    // 发送
+    SET_485_DE_UP();
+    SET_485_RE_UP();
+    HAL_UART_Transmit(&huart1, (uint8_t *)&cmd, sizeof(cmd.motor_send_data), 10); 
+    // 接收
+    SET_485_RE_DOWN();
+    SET_485_DE_DOWN();
+    HAL_UART_Receive_IT(&huart1, (uint8_t *)&data, sizeof(data.motor_recv_data));
+    
+    /**查询编码器参数 
+    */
+    uint8_t encoder_send_buf[ENCODER_SEND_LEN] = {0xFF, 0x03, 0x00, 0x02, 0x00, 0x04, 0xF0, 0x17};
+    
+    HAL_UART_Transmit(&huart3, encoder_send_buf, ENCODER_SEND_LEN, 10);
+    
+    HAL_UART_Receive_IT(&huart3, (uint8_t *)encoder_recv_buf, ENCODER_RECV_LEN);
+    
+    
+  }
+  
+  
+  
+}
+
+/* 串口中断回调函数 ------------------------------------------------------*/
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 {
   if(huart->Instance==USART1)
   {
-//     uint8_t *rp = (uint8_t *)&data.motor_recv_data;
-//     if(rp[0] == 0xFD && rp[1] == 0xEE)
-//     {
-//       data.correct = 1;
-//       extract_data(&data);
-//     }
+    // 电机串口通信数据处理
+    if(sizeof(data.motor_recv_data) > 0)
+    {
+      // 解析电机状态参数
+      uint8_t *rp = (uint8_t *)&data.motor_recv_data;
+      if(rp[0] == 0xFD && rp[1] == 0xEE)
+      {
+        data.correct = 1;
+        motor_data_sta = extract_data(&data);       // 均转化为弧度制单位
+        if(motor_data_sta == 0)
+        {
+          motor_error_count++;
+        }
+        else
+        {
+          motor_error_count = 0;
+          printf("MotorPos %f \n", data.Pos);
+          HAL_GPIO_TogglePin(LD3_GPIO_Port, LD3_Pin);
+          if(data.Pos < 20 && data.Pos > -20)
+          {
+            cmd.id=0;           //给电机控制指令结构体赋值
+            cmd.mode=1;
+            cmd.T=0;
+            cmd.W=0;
+            cmd.Pos=0;
+            cmd.K_P=0;
+            cmd.K_W=0;
+            printf("stop \n");
+          }
+        }
+        HAL_UART_Receive_IT(&huart1, (uint8_t *)&data, sizeof(data.motor_recv_data));
+      }
+    }
+    else
+    {
+      motor_error_count++;
+    }
   }
   else if(huart->Instance==USART2)
   {
+//    Encoder_Send_recv(&blow_position);
+//    printf("encoder data %d \n", blow_position);
+
     
   }
   else if(huart->Instance==USART3)
   {
-    if(g_encoder_recv_buf[0] == 0xFF)
+    if(encoder_recv_buf[0] == 0xFF)
     {
-      Extract_Encoder_Data(g_encoder_recv_buf, &blow_position);
+      printf("encoder data %s \n", encoder_recv_buf);
+      Extract_Encoder_Data(encoder_recv_buf, &blow_position);
+//      printf("encoder data %d \n", blow_position);
+      HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
     }
   }
 }
@@ -272,16 +328,16 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 /* 查询电机当前位置和速度 */
 void Servo_Inquire(float* position, float* speed)
 {
-  cmd.id=0;           //给电机控制指令结构体赋值
-  cmd.mode=1;
-  cmd.T=0;
-  cmd.W=0;
-  cmd.Pos=0.0;
-  cmd.K_P=0.1;
-  cmd.K_W=0.01;
-  SERVO_Send_recv(&cmd, &data);
-  *position = data.Pos;
-  *speed = data.W;
+  cmd.id   = 0;           //给电机控制指令结构体赋值
+  cmd.mode = 1;
+  cmd.T    = 0;
+  cmd.W    = 0;
+  cmd.Pos  = 0.0;
+  cmd.K_P  = 0.1;
+  cmd.K_W  = 0.01;
+//  SERVO_Send_recv(&cmd, &data);
+//  *position = data.Pos;
+//  *speed = data.W;
 }
 
 /* USER CODE END 4 */

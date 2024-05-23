@@ -33,3 +33,7 @@ blowexo\stm32f7xx_hal_msp.o: ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_t
 blowexo\stm32f7xx_hal_msp.o: ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_tim_ex.h
 blowexo\stm32f7xx_hal_msp.o: ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart.h
 blowexo\stm32f7xx_hal_msp.o: ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart_ex.h
+blowexo\stm32f7xx_hal_msp.o: ../Core/Inc/motor_control.h
+blowexo\stm32f7xx_hal_msp.o: ../Core/Inc/main.h
+blowexo\stm32f7xx_hal_msp.o: ../Core/Inc/ris_protocol.h
+blowexo\stm32f7xx_hal_msp.o: ../Core/Inc/RLS_encoder.h

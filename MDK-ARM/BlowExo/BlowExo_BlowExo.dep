@@ -1,9 +1,9 @@
 Dependencies for Project 'BlowExo', Target 'BlowExo': (DO NOT MODIFY !)
 CompilerVersion: 5060960::V5.06 update 7 (build 960)::.\ARMCC
-F (startup_stm32f767xx.s)(0x6638DF70)(--cpu Cortex-M7.fp.dp -g --apcs=interwork -I.\RTE\_BlowExo-ID:\Keil_v5\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include-ID:\Keil_v5\Arm\Packs\Keil\STM32F7xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F7xx\Include--pd "__UVISION_VERSION SETA 536" --pd "_RTE_ SETA 1" --pd "STM32F767xx SETA 1" --pd "_RTE_ SETA 1"--list startup_stm32f767xx.lst --xref -o blowexo\startup_stm32f767xx.o --depend blowexo\startup_stm32f767xx.d)
-F (..\Core\Src\GO-M8010-6.c)(0x6638EEC0)(--c99 -c --cpu Cortex-M7.fp.dp -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F7xx_HAL_Driver/Inc -I ../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_BlowExo-ID:\Keil_v5\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include-ID:\Keil_v5\Arm\Packs\Keil\STM32F7xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F7xx\Include-D__UVISION_VERSION="536" -D_RTE_ -DSTM32F767xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F767xx-o blowexo\go-m8010-6.o --omf_browse blowexo\go-m8010-6.crf --depend blowexo\go-m8010-6.d)
+F (startup_stm32f767xx.s)(0x664EE952)(--cpu Cortex-M7.fp.dp -g --apcs=interwork -I.\RTE\_BlowExo-ID:\Keil_v5\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include-ID:\Keil_v5\Arm\Packs\Keil\STM32F7xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F7xx\Include--pd "__UVISION_VERSION SETA 536" --pd "_RTE_ SETA 1" --pd "STM32F767xx SETA 1" --pd "_RTE_ SETA 1"--list startup_stm32f767xx.lst --xref -o blowexo\startup_stm32f767xx.o --depend blowexo\startup_stm32f767xx.d)
+F (..\Core\Src\GO-M8010-6.c)(0x664AAEFA)(--c99 -c --cpu Cortex-M7.fp.dp -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F7xx_HAL_Driver/Inc -I ../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_BlowExo-ID:\Keil_v5\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include-ID:\Keil_v5\Arm\Packs\Keil\STM32F7xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F7xx\Include-D__UVISION_VERSION="536" -D_RTE_ -DSTM32F767xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F767xx-o blowexo\go-m8010-6.o --omf_browse blowexo\go-m8010-6.crf --depend blowexo\go-m8010-6.d)
 I (../Core/Inc/usart.h)(0x662F39D4)
-I (../Core/Inc/main.h)(0x6638C48F)
+I (../Core/Inc/main.h)(0x664F2781)
 I (../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal.h)(0x6628739B)
 I (../Core/Inc/stm32f7xx_hal_conf.h)(0x6638DF6E)
 I (../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_rcc.h)(0x6628739B)
@@ -38,12 +38,13 @@ I (../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart.h)(0x6628739B)
 I (../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart_ex.h)(0x6628739B)
 I (../Core/Inc/motor_control.h)(0x662F8327)
 I (../Core/Inc/ris_protocol.h)(0x650985E2)
+I (../Core/Inc/RLS_encoder.h)(0x664F2815)
 I (../Core/Inc/crc_ccitt.h)(0x650985E4)
 I (D:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x60252374)
-F (..\Core\Src\RLS_encoder.c)(0x66307C22)(--c99 -c --cpu Cortex-M7.fp.dp -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F7xx_HAL_Driver/Inc -I ../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_BlowExo-ID:\Keil_v5\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include-ID:\Keil_v5\Arm\Packs\Keil\STM32F7xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F7xx\Include-D__UVISION_VERSION="536" -D_RTE_ -DSTM32F767xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F767xx-o blowexo\rls_encoder.o --omf_browse blowexo\rls_encoder.crf --depend blowexo\rls_encoder.d)
-I (../Core/Inc/RLS_encoder.h)(0x662E07B3)
+F (..\Core\Src\RLS_encoder.c)(0x664F281A)(--c99 -c --cpu Cortex-M7.fp.dp -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F7xx_HAL_Driver/Inc -I ../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_BlowExo-ID:\Keil_v5\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include-ID:\Keil_v5\Arm\Packs\Keil\STM32F7xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F7xx\Include-D__UVISION_VERSION="536" -D_RTE_ -DSTM32F767xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F767xx-o blowexo\rls_encoder.o --omf_browse blowexo\rls_encoder.crf --depend blowexo\rls_encoder.d)
+I (../Core/Inc/RLS_encoder.h)(0x664F2815)
 I (D:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x6025237E)
-I (../Core/Inc/main.h)(0x6638C48F)
+I (../Core/Inc/main.h)(0x664F2781)
 I (../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal.h)(0x6628739B)
 I (../Core/Inc/stm32f7xx_hal_conf.h)(0x6638DF6E)
 I (../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_rcc.h)(0x6628739B)
@@ -75,12 +76,14 @@ I (../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_tim.h)(0x6628739B)
 I (../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_tim_ex.h)(0x6628739B)
 I (../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart.h)(0x6628739B)
 I (../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart_ex.h)(0x6628739B)
+I (../Core/Inc/motor_control.h)(0x662F8327)
+I (../Core/Inc/ris_protocol.h)(0x650985E2)
 I (../Core/Inc/usart.h)(0x662F39D4)
 I (D:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x60252374)
 F (..\Core\Src\pid_control.c)(0x662F33AF)(--c99 -c --cpu Cortex-M7.fp.dp -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F7xx_HAL_Driver/Inc -I ../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_BlowExo-ID:\Keil_v5\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include-ID:\Keil_v5\Arm\Packs\Keil\STM32F7xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F7xx\Include-D__UVISION_VERSION="536" -D_RTE_ -DSTM32F767xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F767xx-o blowexo\pid_control.o --omf_browse blowexo\pid_control.crf --depend blowexo\pid_control.d)
 I (../Core/Inc/pid_control.h)(0x662F33DF)
 I (D:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x6025237E)
-I (../Core/Inc/main.h)(0x6638C48F)
+I (../Core/Inc/main.h)(0x664F2781)
 I (../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal.h)(0x6628739B)
 I (../Core/Inc/stm32f7xx_hal_conf.h)(0x6638DF6E)
 I (../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_rcc.h)(0x6628739B)
@@ -112,8 +115,11 @@ I (../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_tim.h)(0x6628739B)
 I (../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_tim_ex.h)(0x6628739B)
 I (../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart.h)(0x6628739B)
 I (../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart_ex.h)(0x6628739B)
-F (../Core/Src/main.c)(0x6638ED98)(--c99 -c --cpu Cortex-M7.fp.dp -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F7xx_HAL_Driver/Inc -I ../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_BlowExo-ID:\Keil_v5\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include-ID:\Keil_v5\Arm\Packs\Keil\STM32F7xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F7xx\Include-D__UVISION_VERSION="536" -D_RTE_ -DSTM32F767xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F767xx-o blowexo\main.o --omf_browse blowexo\main.crf --depend blowexo\main.d)
-I (../Core/Inc/main.h)(0x6638C48F)
+I (../Core/Inc/motor_control.h)(0x662F8327)
+I (../Core/Inc/ris_protocol.h)(0x650985E2)
+I (../Core/Inc/RLS_encoder.h)(0x664F2815)
+F (../Core/Src/main.c)(0x664F2A11)(--c99 -c --cpu Cortex-M7.fp.dp -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F7xx_HAL_Driver/Inc -I ../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_BlowExo-ID:\Keil_v5\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include-ID:\Keil_v5\Arm\Packs\Keil\STM32F7xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F7xx\Include-D__UVISION_VERSION="536" -D_RTE_ -DSTM32F767xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F767xx-o blowexo\main.o --omf_browse blowexo\main.crf --depend blowexo\main.d)
+I (../Core/Inc/main.h)(0x664F2781)
 I (../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal.h)(0x6628739B)
 I (../Core/Inc/stm32f7xx_hal_conf.h)(0x6638DF6E)
 I (../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_rcc.h)(0x6628739B)
@@ -146,16 +152,16 @@ I (../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_tim.h)(0x6628739B)
 I (../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_tim_ex.h)(0x6628739B)
 I (../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart.h)(0x6628739B)
 I (../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart_ex.h)(0x6628739B)
+I (../Core/Inc/motor_control.h)(0x662F8327)
+I (../Core/Inc/ris_protocol.h)(0x650985E2)
+I (../Core/Inc/RLS_encoder.h)(0x664F2815)
 I (../Core/Inc/tim.h)(0x6638DF6E)
 I (../Core/Inc/usart.h)(0x662F39D4)
 I (../Core/Inc/gpio.h)(0x662CB6A4)
-I (../Core/Inc/motor_control.h)(0x662F8327)
-I (../Core/Inc/ris_protocol.h)(0x650985E2)
-I (../Core/Inc/RLS_encoder.h)(0x662E07B3)
 I (D:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x60252374)
 F (../Core/Src/gpio.c)(0x6638C48F)(--c99 -c --cpu Cortex-M7.fp.dp -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F7xx_HAL_Driver/Inc -I ../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_BlowExo-ID:\Keil_v5\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include-ID:\Keil_v5\Arm\Packs\Keil\STM32F7xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F7xx\Include-D__UVISION_VERSION="536" -D_RTE_ -DSTM32F767xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F767xx-o blowexo\gpio.o --omf_browse blowexo\gpio.crf --depend blowexo\gpio.d)
 I (../Core/Inc/gpio.h)(0x662CB6A4)
-I (../Core/Inc/main.h)(0x6638C48F)
+I (../Core/Inc/main.h)(0x664F2781)
 I (../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal.h)(0x6628739B)
 I (../Core/Inc/stm32f7xx_hal_conf.h)(0x6638DF6E)
 I (../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_rcc.h)(0x6628739B)
@@ -188,9 +194,12 @@ I (../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_tim.h)(0x6628739B)
 I (../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_tim_ex.h)(0x6628739B)
 I (../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart.h)(0x6628739B)
 I (../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart_ex.h)(0x6628739B)
-F (../Core/Src/tim.c)(0x6638DF6E)(--c99 -c --cpu Cortex-M7.fp.dp -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F7xx_HAL_Driver/Inc -I ../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_BlowExo-ID:\Keil_v5\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include-ID:\Keil_v5\Arm\Packs\Keil\STM32F7xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F7xx\Include-D__UVISION_VERSION="536" -D_RTE_ -DSTM32F767xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F767xx-o blowexo\tim.o --omf_browse blowexo\tim.crf --depend blowexo\tim.d)
+I (../Core/Inc/motor_control.h)(0x662F8327)
+I (../Core/Inc/ris_protocol.h)(0x650985E2)
+I (../Core/Inc/RLS_encoder.h)(0x664F2815)
+F (../Core/Src/tim.c)(0x664D8D2A)(--c99 -c --cpu Cortex-M7.fp.dp -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F7xx_HAL_Driver/Inc -I ../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_BlowExo-ID:\Keil_v5\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include-ID:\Keil_v5\Arm\Packs\Keil\STM32F7xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F7xx\Include-D__UVISION_VERSION="536" -D_RTE_ -DSTM32F767xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F767xx-o blowexo\tim.o --omf_browse blowexo\tim.crf --depend blowexo\tim.d)
 I (../Core/Inc/tim.h)(0x6638DF6E)
-I (../Core/Inc/main.h)(0x6638C48F)
+I (../Core/Inc/main.h)(0x664F2781)
 I (../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal.h)(0x6628739B)
 I (../Core/Inc/stm32f7xx_hal_conf.h)(0x6638DF6E)
 I (../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_rcc.h)(0x6628739B)
@@ -223,9 +232,12 @@ I (../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_tim.h)(0x6628739B)
 I (../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_tim_ex.h)(0x6628739B)
 I (../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart.h)(0x6628739B)
 I (../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart_ex.h)(0x6628739B)
-F (../Core/Src/usart.c)(0x6638C431)(--c99 -c --cpu Cortex-M7.fp.dp -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F7xx_HAL_Driver/Inc -I ../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_BlowExo-ID:\Keil_v5\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include-ID:\Keil_v5\Arm\Packs\Keil\STM32F7xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F7xx\Include-D__UVISION_VERSION="536" -D_RTE_ -DSTM32F767xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F767xx-o blowexo\usart.o --omf_browse blowexo\usart.crf --depend blowexo\usart.d)
+I (../Core/Inc/motor_control.h)(0x662F8327)
+I (../Core/Inc/ris_protocol.h)(0x650985E2)
+I (../Core/Inc/RLS_encoder.h)(0x664F2815)
+F (../Core/Src/usart.c)(0x664D63D9)(--c99 -c --cpu Cortex-M7.fp.dp -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F7xx_HAL_Driver/Inc -I ../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_BlowExo-ID:\Keil_v5\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include-ID:\Keil_v5\Arm\Packs\Keil\STM32F7xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F7xx\Include-D__UVISION_VERSION="536" -D_RTE_ -DSTM32F767xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F767xx-o blowexo\usart.o --omf_browse blowexo\usart.crf --depend blowexo\usart.d)
 I (../Core/Inc/usart.h)(0x662F39D4)
-I (../Core/Inc/main.h)(0x6638C48F)
+I (../Core/Inc/main.h)(0x664F2781)
 I (../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal.h)(0x6628739B)
 I (../Core/Inc/stm32f7xx_hal_conf.h)(0x6638DF6E)
 I (../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_rcc.h)(0x6628739B)
@@ -258,9 +270,12 @@ I (../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_tim.h)(0x6628739B)
 I (../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_tim_ex.h)(0x6628739B)
 I (../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart.h)(0x6628739B)
 I (../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart_ex.h)(0x6628739B)
+I (../Core/Inc/motor_control.h)(0x662F8327)
+I (../Core/Inc/ris_protocol.h)(0x650985E2)
+I (../Core/Inc/RLS_encoder.h)(0x664F2815)
 I (D:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x60252374)
-F (../Core/Src/stm32f7xx_it.c)(0x6638DF6E)(--c99 -c --cpu Cortex-M7.fp.dp -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F7xx_HAL_Driver/Inc -I ../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_BlowExo-ID:\Keil_v5\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include-ID:\Keil_v5\Arm\Packs\Keil\STM32F7xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F7xx\Include-D__UVISION_VERSION="536" -D_RTE_ -DSTM32F767xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F767xx-o blowexo\stm32f7xx_it.o --omf_browse blowexo\stm32f7xx_it.crf --depend blowexo\stm32f7xx_it.d)
-I (../Core/Inc/main.h)(0x6638C48F)
+F (../Core/Src/stm32f7xx_it.c)(0x6644C540)(--c99 -c --cpu Cortex-M7.fp.dp -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F7xx_HAL_Driver/Inc -I ../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_BlowExo-ID:\Keil_v5\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include-ID:\Keil_v5\Arm\Packs\Keil\STM32F7xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F7xx\Include-D__UVISION_VERSION="536" -D_RTE_ -DSTM32F767xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F767xx-o blowexo\stm32f7xx_it.o --omf_browse blowexo\stm32f7xx_it.crf --depend blowexo\stm32f7xx_it.d)
+I (../Core/Inc/main.h)(0x664F2781)
 I (../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal.h)(0x6628739B)
 I (../Core/Inc/stm32f7xx_hal_conf.h)(0x6638DF6E)
 I (../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_rcc.h)(0x6628739B)
@@ -293,11 +308,13 @@ I (../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_tim.h)(0x6628739B)
 I (../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_tim_ex.h)(0x6628739B)
 I (../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart.h)(0x6628739B)
 I (../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart_ex.h)(0x6628739B)
-I (../Core/Inc/stm32f7xx_it.h)(0x6638DF6E)
-I (../Core/Inc/RLS_encoder.h)(0x662E07B3)
+I (../Core/Inc/motor_control.h)(0x662F8327)
+I (../Core/Inc/ris_protocol.h)(0x650985E2)
+I (../Core/Inc/RLS_encoder.h)(0x664F2815)
+I (../Core/Inc/stm32f7xx_it.h)(0x6644C540)
 I (../Core/Inc/usart.h)(0x662F39D4)
 F (../Core/Src/stm32f7xx_hal_msp.c)(0x662CB6A5)(--c99 -c --cpu Cortex-M7.fp.dp -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F7xx_HAL_Driver/Inc -I ../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_BlowExo-ID:\Keil_v5\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include-ID:\Keil_v5\Arm\Packs\Keil\STM32F7xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F7xx\Include-D__UVISION_VERSION="536" -D_RTE_ -DSTM32F767xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F767xx-o blowexo\stm32f7xx_hal_msp.o --omf_browse blowexo\stm32f7xx_hal_msp.crf --depend blowexo\stm32f7xx_hal_msp.d)
-I (../Core/Inc/main.h)(0x6638C48F)
+I (../Core/Inc/main.h)(0x664F2781)
 I (../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal.h)(0x6628739B)
 I (../Core/Inc/stm32f7xx_hal_conf.h)(0x6638DF6E)
 I (../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_rcc.h)(0x6628739B)
@@ -330,6 +347,9 @@ I (../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_tim.h)(0x6628739B)
 I (../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_tim_ex.h)(0x6628739B)
 I (../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart.h)(0x6628739B)
 I (../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart_ex.h)(0x6628739B)
+I (../Core/Inc/motor_control.h)(0x662F8327)
+I (../Core/Inc/ris_protocol.h)(0x650985E2)
+I (../Core/Inc/RLS_encoder.h)(0x664F2815)
 F (../Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_cortex.c)(0x6628739B)(--c99 -c --cpu Cortex-M7.fp.dp -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F7xx_HAL_Driver/Inc -I ../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F7xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_BlowExo-ID:\Keil_v5\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include-ID:\Keil_v5\Arm\Packs\Keil\STM32F7xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F7xx\Include-D__UVISION_VERSION="536" -D_RTE_ -DSTM32F767xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F767xx-o blowexo\stm32f7xx_hal_cortex.o --omf_browse blowexo\stm32f7xx_hal_cortex.crf --depend blowexo\stm32f7xx_hal_cortex.d)
 I (../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal.h)(0x6628739B)
 I (../Core/Inc/stm32f7xx_hal_conf.h)(0x6638DF6E)

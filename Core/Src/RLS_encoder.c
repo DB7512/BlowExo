@@ -3,8 +3,9 @@
 #include "stdio.h"
 #include "main.h"
 
-uint8_t g_encoder_recv_buf[ENCODER_RECV_LEN] = {0};                   // 编码器向主机发送
+uint8_t encoder_send_buf[ENCODER_SEND_LEN] = {0xFF, 0x03, 0x00, 0x02, 0x00, 0x04, 0xF0, 0x17};                   // 编码器向主机发送
 
+uint8_t encoder_recv_buf[ENCODER_RECV_LEN] = {0};
 
 /**
  * @brief       解析编码器数据
@@ -55,33 +56,15 @@ int Extract_Encoder_Data(uint8_t *pData, int *eData)
  *              
  * @retval      
  */
-HAL_StatusTypeDef Encoder_Send_recv(int *eData)
+HAL_StatusTypeDef Encoder_Send_recv()
 {
-//  uint16_t rxlen = 0;
-  uint8_t encoder_send_buf[ENCODER_SEND_LEN] = {0xFF, 0x03, 0x00, 0x02, 0x00, 0x04, 0xF0, 0x17};
+  uint8_t encoder_send_buf[ENCODER_SEND_LEN] = {0xFF, 0x03, 0x00, 0x02, 0x00, 0x04, 0xF0, 0x17};        // FF 03 00 02 00 04 F0 17
   
   HAL_UART_Transmit(&huart3, encoder_send_buf, ENCODER_SEND_LEN, 10);
   
-  if(HAL_UART_Receive_IT(&huart3, (uint8_t *)g_encoder_recv_buf, ENCODER_RECV_LEN) == HAL_OK)
+  if(HAL_UART_Receive_IT(&huart3, (uint8_t *)encoder_recv_buf, ENCODER_RECV_LEN) == HAL_OK)
   {
     return HAL_OK;
   }
   return HAL_ERROR;
-  
-//  if(rxlen == 0)
-//  {
-//    return HAL_TIMEOUT;
-//  }
-//  if(rxlen != ENCODER_RECV_LEN)
-//  {
-//    return HAL_ERROR;
-//  }
-//  
-//  uint8_t *rp = (uint8_t *)&g_encoder_recv_buf;
-//  if(rp[0] == 0xFF)
-//  {
-//    Extract_Encoder_Data(g_encoder_recv_buf, eData);
-//    return HAL_OK;
-//  }
-//  return HAL_ERROR;
 }

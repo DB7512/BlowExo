@@ -22,6 +22,7 @@
 
 /* USER CODE BEGIN 0 */
 #include "stdio.h"
+#include "main.h"
 /******************************************************************************************/
 /* 加入以下代码, 支持printf函数, 而不需要选择use MicroLIB */
 #if 1
@@ -110,7 +111,7 @@ void MX_USART1_UART_Init(void)
     Error_Handler();
   }
   /* USER CODE BEGIN USART1_Init 2 */
-
+  HAL_UART_Receive_IT(&huart1, (uint8_t *)&data, sizeof(data.motor_recv_data));
   /* USER CODE END USART1_Init 2 */
 
 }
@@ -127,7 +128,7 @@ void MX_USART2_UART_Init(void)
 
   /* USER CODE END USART2_Init 1 */
   huart2.Instance = USART2;
-  huart2.Init.BaudRate = 115200;
+  huart2.Init.BaudRate = 1000000;
   huart2.Init.WordLength = UART_WORDLENGTH_8B;
   huart2.Init.StopBits = UART_STOPBITS_1;
   huart2.Init.Parity = UART_PARITY_NONE;
@@ -141,7 +142,7 @@ void MX_USART2_UART_Init(void)
     Error_Handler();
   }
   /* USER CODE BEGIN USART2_Init 2 */
-
+  
   /* USER CODE END USART2_Init 2 */
 
 }
@@ -172,7 +173,7 @@ void MX_USART3_UART_Init(void)
     Error_Handler();
   }
   /* USER CODE BEGIN USART3_Init 2 */
-
+  HAL_UART_Receive_IT(&huart3, (uint8_t *)encoder_recv_buf, ENCODER_RECV_LEN);
   /* USER CODE END USART3_Init 2 */
 
 }
@@ -220,7 +221,7 @@ void HAL_UART_MspInit(UART_HandleTypeDef* uartHandle)
     HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
     /* USART1 interrupt Init */
-    HAL_NVIC_SetPriority(USART1_IRQn, 3, 0);
+    HAL_NVIC_SetPriority(USART1_IRQn, 1, 0);
     HAL_NVIC_EnableIRQ(USART1_IRQn);
   /* USER CODE BEGIN USART1_MspInit 1 */
 
@@ -257,7 +258,7 @@ void HAL_UART_MspInit(UART_HandleTypeDef* uartHandle)
     HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
     /* USART2 interrupt Init */
-    HAL_NVIC_SetPriority(USART2_IRQn, 2, 0);
+    HAL_NVIC_SetPriority(USART2_IRQn, 1, 0);
     HAL_NVIC_EnableIRQ(USART2_IRQn);
   /* USER CODE BEGIN USART2_MspInit 1 */
 
@@ -294,7 +295,7 @@ void HAL_UART_MspInit(UART_HandleTypeDef* uartHandle)
     HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
     /* USART3 interrupt Init */
-    HAL_NVIC_SetPriority(USART3_IRQn, 3, 0);
+    HAL_NVIC_SetPriority(USART3_IRQn, 1, 0);
     HAL_NVIC_EnableIRQ(USART3_IRQn);
   /* USER CODE BEGIN USART3_MspInit 1 */
 

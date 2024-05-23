@@ -31,7 +31,8 @@ extern "C" {
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "motor_control.h"
+#include "RLS_encoder.h"
 /* USER CODE END Includes */
 
 /* Exported types ------------------------------------------------------------*/
@@ -69,6 +70,21 @@ void Error_Handler(void);
 #define LD2_GPIO_Port GPIOB
 
 /* USER CODE BEGIN Private defines */
+#define ENCODER_SEND_LEN 8
+#define ENCODER_RECV_LEN 13
+
+extern MOTOR_send cmd;
+extern MOTOR_recv data;
+extern uint8_t encoder_recv_buf[ENCODER_RECV_LEN];
+
+extern int count;
+extern int usart1_sta;
+
+extern int motor_error_count;  // 电机错误次数，累计到10次报错
+extern int motor_sta;          // 电机状态，0：停止，1：运动
+extern int motor_data_sta;     // 电机参数解析状态，即motor_r->correct的全局变量
+extern int rls_error_count;    // 编码器错误次数，累积到10次报错
+
 void Servo_Inquire(float* position, float* speed);
 /* USER CODE END Private defines */
 
