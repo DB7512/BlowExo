@@ -117,14 +117,4 @@ HAL_StatusTypeDef SERVO_Send_recv(MOTOR_send *pData, MOTOR_recv *rData)
     }
     
     return HAL_ERROR;
-    
-//    if(HAL_UARTEx_ReceiveToIdle_IT(&huart1, (uint8_t *)rData, sizeof(rData->motor_recv_data)) == HAL_OK)
-////    if(HAL_UART_Receive_IT(&huart1, (uint8_t *)rData, sizeof(rData->motor_recv_data)) == HAL_OK)
-//    {
-//      return HAL_OK;
-//    }
-//    else
-//    {
-//      return HAL_ERROR;
-//    }
 }

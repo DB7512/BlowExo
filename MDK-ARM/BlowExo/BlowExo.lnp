@@ -9,6 +9,7 @@
 "blowexo\usart.o"
 "blowexo\stm32f7xx_it.o"
 "blowexo\stm32f7xx_hal_msp.o"
+"blowexo\servo_control.o"
 "blowexo\stm32f7xx_hal_cortex.o"
 "blowexo\stm32f7xx_hal_tim.o"
 "blowexo\stm32f7xx_hal_tim_ex.o"

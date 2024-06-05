@@ -25,6 +25,8 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "stdio.h"
+#include "pid_control.h"
+#include "servo_control.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -47,7 +49,10 @@
 /* USER CODE BEGIN PV */
 MOTOR_send cmd;             // 以全局变量声明电机控制结构体和电机数据结构体，方便在故障时通过debug查看变量值
 MOTOR_recv data;
-int blow_position = 0;      // RLS编码器位置
+Motor_PID pid;
+
+uint8_t servo_send_sta = 0;     // 伺服发送标志，接收到上位机指令后置1
+
 int count = 0;
 int usart1_sta = 0;
 
@@ -118,14 +123,16 @@ int main(void)
   float blow_position_rad = 0.0;    // 肘关节位置（rad）
   float blow_speed_rad = 0.0;       // 肘关节速度（rad/s）
   
-  /* 获取电机当前信息 */
-  if(motor_sta != 1)
-  {
-    /** 设置电机工作模式，仅初始查询电机参数
-    */
-    Servo_Inquire(&motor_position_rad, &motor_speed_rad);
-//    printf("motorpos %f \n", data.Pos);
-  }
+  
+  Servo_Init(&cmd, &data);
+//  /* 获取电机当前信息 */
+//  if(motor_sta != 1)
+//  {
+//    /** 设置电机工作模式，仅初始查询电机参数
+//    */
+//    Servo_Inquire(&motor_position_rad, &motor_speed_rad);
+////    printf("motorpos %f \n", data.Pos);
+//  }
   
   float pos = 0;
   float delta = -0.005;
@@ -133,14 +140,13 @@ int main(void)
   cmd.id=0;           //给电机控制指令结构体赋值
   cmd.mode=1;
   cmd.T=0;
-  cmd.W=-10;
+  cmd.W=10;
   cmd.Pos=0;
   cmd.K_P=0;
   cmd.K_W=0.05;
 
 
   HAL_TIM_Base_Start_IT(&htim2);    // 开启定时器中断
-  
 
   /* USER CODE END 2 */
 
@@ -152,6 +158,41 @@ int main(void)
     {
       printf("motor error \n");
       Error_Handler();
+    }
+    if(servo_send_sta == 1)
+    {
+      servo_send_buf[0] = 0xFF;
+      servo_send_buf[1] = 0xFE;
+      /* 电机模式信息1Byte */
+      uint8_t smode = servo_mode << 4;
+      smode |= servo_error;
+      servo_send_buf[2] = smode;
+      /* 反馈参数 */
+      uint8_t data_h, data_l;
+      // 位置
+      data_h = (actual_position & 0xFF00) >> 8;
+      data_l = (actual_position & 0xFF);
+      servo_send_buf[3] = data_h;
+      servo_send_buf[4] = data_l;
+      // 速度
+      data_h = (actual_velocity & 0xFF00) >> 8;
+      data_l = (actual_velocity & 0xFF);
+      servo_send_buf[5] = data_h;
+      servo_send_buf[6] = data_l;
+      // 力矩
+      data_h = (actual_torque & 0xFF00) >> 8;
+      data_l = (actual_torque & 0xFF);
+      servo_send_buf[7] = data_h;
+      servo_send_buf[8] = data_l;
+
+      /* CRC校验 */
+      uint16_t crc = crc_ccitt(0, (uint8_t *)servo_send_buf, SERVO_SEND_LEN-2);
+      data_h = (crc & 0xFF00) >> 8;
+      data_l = (crc & 0xFF);
+      servo_send_buf[9] = data_h;
+      servo_send_buf[10] = data_l;
+//      HAL_UART_Transmit_IT(&huart2, (uint8_t *)servo_send_buf, sizeof(servo_send_buf));
+      servo_send_sta = 0;
     }
     
 
@@ -236,34 +277,42 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
   if(htim->Instance == TIM2)
   {
+    Get_Servo_Information();
     /** 查询电机参数
     */
-    modify_data(&cmd);
-    // 发送
-    SET_485_DE_UP();
-    SET_485_RE_UP();
-    HAL_UART_Transmit(&huart1, (uint8_t *)&cmd, sizeof(cmd.motor_send_data), 10); 
-    // 接收
-    SET_485_RE_DOWN();
-    SET_485_DE_DOWN();
-    HAL_UART_Receive_IT(&huart1, (uint8_t *)&data, sizeof(data.motor_recv_data));
+//    Motor_Send_Recv(&cmd, &data);
+//    modify_data(&cmd);
+//    // 发送
+//    SET_485_DE_UP();
+//    SET_485_RE_UP();
+//    HAL_UART_Transmit(&huart1, (uint8_t *)&cmd, sizeof(cmd.motor_send_data), 10); 
+//    // 接收
+//    SET_485_RE_DOWN();
+//    SET_485_DE_DOWN();
+//    HAL_UART_Receive_IT(&huart1, (uint8_t *)&data, sizeof(data.motor_recv_data));
     
-    /**查询编码器参数 
+    /** 查询编码器参数 
     */
-    uint8_t encoder_send_buf[ENCODER_SEND_LEN] = {0xFF, 0x03, 0x00, 0x02, 0x00, 0x04, 0xF0, 0x17};
+//    Encoder_Send_Recv(encoder_recv_buf);
     
-    HAL_UART_Transmit(&huart3, encoder_send_buf, ENCODER_SEND_LEN, 10);
+    /** PID控制
+    */
     
-    HAL_UART_Receive_IT(&huart3, (uint8_t *)encoder_recv_buf, ENCODER_RECV_LEN);
+    
+    
+    
+    /** 上传关节信息
+    */
+    
+    
+    
+    
     
     
   }
-  
-  
-  
 }
 
-/* 串口中断回调函数 ------------------------------------------------------*/
+/* 串口接收中断回调函数 ------------------------------------------------------*/
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 {
   if(huart->Instance==USART1)
@@ -286,7 +335,7 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
           motor_error_count = 0;
           printf("MotorPos %f \n", data.Pos);
           HAL_GPIO_TogglePin(LD3_GPIO_Port, LD3_Pin);
-          if(data.Pos < 20 && data.Pos > -20)
+          if(data.Pos < 1 && data.Pos > -1)
           {
             cmd.id=0;           //给电机控制指令结构体赋值
             cmd.mode=1;
@@ -308,17 +357,38 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
   }
   else if(huart->Instance==USART2)
   {
-//    Encoder_Send_recv(&blow_position);
-//    printf("encoder data %d \n", blow_position);
-
-    
+    /* 解析上位机通信指令 */
+    if(sizeof(servo_recv_buf) > 0)
+    {
+      if(servo_recv_buf[0] == 0xFF)
+      {
+        if(servo_recv_buf[1] == 0xFE)
+        {
+          Extract_Servo_Recv(servo_recv_buf);
+          servo_send_sta = 1;
+        }
+        else
+        {
+          // 不是当前设备地址
+        }
+      }
+      else
+      {
+        // 通信有误
+      }
+    }
+    else
+    {
+      // 通信有误
+    }
   }
   else if(huart->Instance==USART3)
   {
     if(encoder_recv_buf[0] == 0xFF)
     {
-      printf("encoder data %s \n", encoder_recv_buf);
-      Extract_Encoder_Data(encoder_recv_buf, &blow_position);
+//      printf("encoder data %s \n", encoder_recv_buf);
+      Extract_Encoder_Data(encoder_recv_buf, &blow_position);       // blow_position存放编码器当前位置
+      printf("FF %d \n", blow_position);
 //      printf("encoder data %d \n", blow_position);
       HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
     }

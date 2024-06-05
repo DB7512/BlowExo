@@ -70,12 +70,12 @@ void Error_Handler(void);
 #define LD2_GPIO_Port GPIOB
 
 /* USER CODE BEGIN Private defines */
-#define ENCODER_SEND_LEN 8
-#define ENCODER_RECV_LEN 13
 
 extern MOTOR_send cmd;
 extern MOTOR_recv data;
-extern uint8_t encoder_recv_buf[ENCODER_RECV_LEN];
+//extern uint8_t encoder_recv_buf[ENCODER_RECV_LEN];
+
+
 
 extern int count;
 extern int usart1_sta;

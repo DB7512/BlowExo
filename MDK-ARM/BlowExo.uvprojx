@@ -489,6 +489,11 @@
               <FileType>1</FileType>
               <FilePath>../Core/Src/stm32f7xx_hal_msp.c</FilePath>
             </File>
+            <File>
+              <FileName>servo_control.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Core\Src\servo_control.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

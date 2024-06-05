@@ -46,7 +46,7 @@ uint16_t const crc_ccitt_table[256] = {
 };
 
 
-static uint16_t crc_ccitt_byte(uint16_t crc, const uint8_t c)
+extern uint16_t crc_ccitt_byte(uint16_t crc, const uint8_t c)
 {
 	return (crc >> 8) ^ crc_ccitt_table[(crc ^ c) & 0xff];
 }
@@ -58,7 +58,7 @@ static uint16_t crc_ccitt_byte(uint16_t crc, const uint8_t c)
  *	@buffer: data pointer
  *	@len: number of bytes in the buffer
  */
-static uint16_t crc_ccitt(uint16_t crc, uint8_t const *buffer, size_t len)
+extern uint16_t crc_ccitt(uint16_t crc, uint8_t const *buffer, size_t len)
 {
 	uint16_t tmp = crc;
 	while (len--)

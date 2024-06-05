@@ -26,6 +26,8 @@ typedef struct
     float minOutput;
 } Motor_PID;     //电机控制命令数据包
 
-
+extern void Init_PID(Motor_PID *pid);
+extern void PID_Realize(int target, int actual, float dt, Motor_PID *pid);
+extern float Omega_Pluse_to_Radian(int pluse);
 
 #endif

@@ -13,6 +13,6 @@ extern uint8_t encoder_recv_buf[ENCODER_RECV_LEN];
 
 extern int Extract_Encoder_Data(uint8_t *pData, int *eData);
 
-HAL_StatusTypeDef Encoder_Send_recv();
+extern void Encoder_Send_Recv(uint8_t *rData);
 
 #endif

@@ -3,38 +3,38 @@
 #include "stdio.h"
 #include "main.h"
 
-uint8_t encoder_send_buf[ENCODER_SEND_LEN] = {0xFF, 0x03, 0x00, 0x02, 0x00, 0x04, 0xF0, 0x17};                   // ±àÂëÆ÷ÏòÖ÷»ú·¢ËÍ
+uint8_t encoder_send_buf[ENCODER_SEND_LEN] = {0xFF, 0x03, 0x00, 0x02, 0x00, 0x04, 0xF0, 0x17};                   // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 uint8_t encoder_recv_buf[ENCODER_RECV_LEN] = {0};
 
 /**
- * @brief       ½âÎö±àÂëÆ÷Êý¾Ý
- * @param       pData£º±àÂëÆ÷Êý¾Ý
+ * @brief       ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+ * @param       pDataï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
  * @note        
  *              
- * @retval      -1£º±àÂëÆ÷´æÔÚ´íÎó»ò¾¯¸æ£»0£ºÊý¾ÝÍêÕû£»1£ºÊý¾Ý²»ÍêÕû
+ * @retval      -1ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú´ï¿½ï¿½ï¿½ò¾¯¸æ£»0ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½1ï¿½ï¿½ï¿½ï¿½ï¿½Ý²ï¿½ï¿½ï¿½ï¿½ï¿½
  */
 int Extract_Encoder_Data(uint8_t *pData, int *eData)
 {
-  // ÐèÒª²¹³äCRCÐ£ÑéÈ·±£½ÓÊÕÊý¾ÝµÄÍêÕû
+  // ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½CRCÐ£ï¿½ï¿½È·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ýµï¿½ï¿½ï¿½ï¿½ï¿½
   
-  /* ¼ì²â´íÎóÎ»ºÍ¾¯¸æÎ» */
+  /* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½Í¾ï¿½ï¿½ï¿½Î» */
   uint8_t error = 0;
   uint8_t warning = 0;
   uint8_t error_bit = (uint8_t)pData[10];
   error |= error_bit >> 7;
   warning |= (error_bit >> 6) & 0x01;
-  /* ½âÎöÎ»ÖÃ */
+  /* ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½ */
   uint32_t position = 0;
   uint32_t multiturn = 0;
   if (error != 0 && warning != 0)
   {
-    /* 1-17bits±£´æÎ»ÖÃ£¨¹²17bits£© */
+    /* 1-17bitsï¿½ï¿½ï¿½ï¿½Î»ï¿½Ã£ï¿½ï¿½ï¿½17bitsï¿½ï¿½ */
     position |= (uint8_t)pData[4];
     position |= ((uint8_t)pData[3]) << 8;
     position |= ((uint8_t)pData[6]) << 8 * 2;
     position &= 0x1FFF;
-    /* 18-33bits±£´æÈ¦Êý£¨¹²16bits£© */
+    /* 18-33bitsï¿½ï¿½ï¿½ï¿½È¦ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½16bitsï¿½ï¿½ */
     multiturn |= (uint8_t)pData[6];
     multiturn |= ((uint8_t)pData[5]) << 8;
     multiturn |= ((uint8_t)pData[8]) << 8 * 2;
@@ -50,21 +50,18 @@ int Extract_Encoder_Data(uint8_t *pData, int *eData)
 }
 
 /**
- * @brief       Ö÷»ú·¢ËÍ¶ÁÈ¡Î»ÖÃÖ¸Áî£¬±àÂëÆ÷·µ»Ø¹Ø½ÚÎ»ÖÃ
- * @param       pData¶ÁÈ¡Î»ÖÃÖ¸Áî£¬rData´Ó»ú·µ»ØÎ»ÖÃ
+ * @brief       ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¶ï¿½È¡Î»ï¿½ï¿½Ö¸ï¿½î£¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø¹Ø½ï¿½Î»ï¿½ï¿½
+ * @param       rDataï¿½Ó»ï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½
  * @note        
  *              
  * @retval      
  */
-HAL_StatusTypeDef Encoder_Send_recv()
+void Encoder_Send_Recv(uint8_t *rData)
 {
   uint8_t encoder_send_buf[ENCODER_SEND_LEN] = {0xFF, 0x03, 0x00, 0x02, 0x00, 0x04, 0xF0, 0x17};        // FF 03 00 02 00 04 F0 17
   
   HAL_UART_Transmit(&huart3, encoder_send_buf, ENCODER_SEND_LEN, 10);
   
-  if(HAL_UART_Receive_IT(&huart3, (uint8_t *)encoder_recv_buf, ENCODER_RECV_LEN) == HAL_OK)
-  {
-    return HAL_OK;
-  }
-  return HAL_ERROR;
+  HAL_UART_Receive_IT(&huart3, (uint8_t *)rData, ENCODER_RECV_LEN);
+  
 }
