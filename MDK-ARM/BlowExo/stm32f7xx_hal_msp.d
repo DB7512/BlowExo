@@ -37,3 +37,6 @@ blowexo\stm32f7xx_hal_msp.o: ../Core/Inc/motor_control.h
 blowexo\stm32f7xx_hal_msp.o: ../Core/Inc/main.h
 blowexo\stm32f7xx_hal_msp.o: ../Core/Inc/ris_protocol.h
 blowexo\stm32f7xx_hal_msp.o: ../Core/Inc/RLS_encoder.h
+blowexo\stm32f7xx_hal_msp.o: ../Core/Inc/pid_control.h
+blowexo\stm32f7xx_hal_msp.o: ../Core/Inc/servo_control.h
+blowexo\stm32f7xx_hal_msp.o: ../Core/Inc/usart.h

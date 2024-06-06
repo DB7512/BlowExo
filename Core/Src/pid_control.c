@@ -1,8 +1,12 @@
 #include "pid_control.h"
+#include "stdio.h"
+#include "usart.h"
+
+Motor_PID pid;
 
 void Init_PID(Motor_PID *pid)
 {
-  pid->kp = 0;               // 比例系数
+  pid->kp = 0.05;               // 比例系数
   pid->ki = 0;               // 积分系数
   pid->kd = 0;               // 微分系数
   pid->error = 0;            // 误差
@@ -19,16 +23,23 @@ void Init_PID(Motor_PID *pid)
 
 void PID_Realize(int target, int actual, float dt, Motor_PID *pid)
 {
-  pid->error = target - actual;
+  dt = dt / 1000.0;
+  
+  pid->error = (float)(target - actual);
+  printf("pid->error %f \n", pid->error);
   
   pid->p_out = pid->kp * pid->error;
+  printf("pid->p_out %f \n", pid->p_out);
   
   pid->integral += pid->error * dt;
   pid->i_out = pid->ki * pid->integral;
+  printf("pid->i_out %f \n", pid->i_out);
   
   pid->d_out = pid->kd * (pid->error - pid->last_error) / dt;
+  printf("pid->d_out %f \n", pid->d_out);
   
   pid->output = pid->p_out + pid->i_out + pid->d_out;
+  printf("pid->output %f \n", pid->output);
   
   pid->last_error = pid->error;
   

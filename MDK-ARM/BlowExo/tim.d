@@ -38,3 +38,6 @@ blowexo\tim.o: ../Core/Inc/motor_control.h
 blowexo\tim.o: ../Core/Inc/main.h
 blowexo\tim.o: ../Core/Inc/ris_protocol.h
 blowexo\tim.o: ../Core/Inc/RLS_encoder.h
+blowexo\tim.o: ../Core/Inc/pid_control.h
+blowexo\tim.o: ../Core/Inc/servo_control.h
+blowexo\tim.o: ../Core/Inc/usart.h

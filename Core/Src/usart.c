@@ -23,6 +23,7 @@
 /* USER CODE BEGIN 0 */
 #include "stdio.h"
 #include "main.h"
+#include "servo_control.h"
 /******************************************************************************************/
 /* 加入以下代码, 支持printf函数, 而不需要选择use MicroLIB */
 #if 1
@@ -142,7 +143,7 @@ void MX_USART2_UART_Init(void)
     Error_Handler();
   }
   /* USER CODE BEGIN USART2_Init 2 */
-  
+  HAL_UART_Receive_IT(&huart2, (uint8_t *)servo_recv_buf, sizeof(servo_recv_buf));
   /* USER CODE END USART2_Init 2 */
 
 }

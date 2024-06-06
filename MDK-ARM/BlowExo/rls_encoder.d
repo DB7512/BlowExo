@@ -38,5 +38,7 @@ blowexo\rls_encoder.o: ../Core/Inc/motor_control.h
 blowexo\rls_encoder.o: ../Core/Inc/main.h
 blowexo\rls_encoder.o: ../Core/Inc/ris_protocol.h
 blowexo\rls_encoder.o: ../Core/Inc/RLS_encoder.h
+blowexo\rls_encoder.o: ../Core/Inc/pid_control.h
+blowexo\rls_encoder.o: ../Core/Inc/servo_control.h
 blowexo\rls_encoder.o: ../Core/Inc/usart.h
 blowexo\rls_encoder.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h

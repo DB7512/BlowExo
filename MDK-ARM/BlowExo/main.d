@@ -37,9 +37,9 @@ blowexo\main.o: ../Core/Inc/motor_control.h
 blowexo\main.o: ../Core/Inc/main.h
 blowexo\main.o: ../Core/Inc/ris_protocol.h
 blowexo\main.o: ../Core/Inc/RLS_encoder.h
-blowexo\main.o: ../Core/Inc/tim.h
-blowexo\main.o: ../Core/Inc/usart.h
-blowexo\main.o: ../Core/Inc/gpio.h
-blowexo\main.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 blowexo\main.o: ../Core/Inc/pid_control.h
 blowexo\main.o: ../Core/Inc/servo_control.h
+blowexo\main.o: ../Core/Inc/usart.h
+blowexo\main.o: ../Core/Inc/tim.h
+blowexo\main.o: ../Core/Inc/gpio.h
+blowexo\main.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h

@@ -32,23 +32,23 @@ compiling main.c...
   extern void Get_Servo_Information();
 ../Core/Inc/servo_control.h(34): warning:  #1-D: last line of file ends without a newline
   #endif
-../Core/Src/main.c(189): warning:  #223-D: function "crc_ccitt" declared implicitly
+../Core/Src/main.c(187): warning:  #223-D: function "crc_ccitt" declared implicitly
         uint16_t crc = crc_ccitt(0, (uint8_t *)servo_send_buf, SERVO_SEND_LEN-2);
-../Core/Src/main.c(120): warning:  #177-D: variable "motor_position_rad"  was declared but never referenced
+../Core/Src/main.c(118): warning:  #177-D: variable "motor_position_rad"  was declared but never referenced
     float motor_position_rad = 0.0;   // 电机位置（rad）
-../Core/Src/main.c(121): warning:  #177-D: variable "motor_speed_rad"  was declared but never referenced
+../Core/Src/main.c(119): warning:  #177-D: variable "motor_speed_rad"  was declared but never referenced
     float motor_speed_rad = 0.0;      // 电机速度（rad/s）
-../Core/Src/main.c(123): warning:  #177-D: variable "blow_position_rad"  was declared but never referenced
+../Core/Src/main.c(121): warning:  #177-D: variable "blow_position_rad"  was declared but never referenced
     float blow_position_rad = 0.0;    // 肘关节位置（rad）
-../Core/Src/main.c(124): warning:  #177-D: variable "blow_speed_rad"  was declared but never referenced
+../Core/Src/main.c(122): warning:  #177-D: variable "blow_speed_rad"  was declared but never referenced
     float blow_speed_rad = 0.0;       // 肘关节速度（rad/s）
-../Core/Src/main.c(137): warning:  #177-D: variable "pos"  was declared but never referenced
+../Core/Src/main.c(128): warning:  #177-D: variable "pos"  was declared but never referenced
     float pos = 0;
-../Core/Src/main.c(138): warning:  #177-D: variable "delta"  was declared but never referenced
+../Core/Src/main.c(129): warning:  #177-D: variable "delta"  was declared but never referenced
     float delta = -0.005;
 ../Core/Src/main.c: 9 warnings, 0 errors
 linking...
-Program Size: Code=19038 RO-data=1250 RW-data=88 ZI-data=2336  
+Program Size: Code=20106 RO-data=1250 RW-data=88 ZI-data=2344  
 FromELF: creating hex file...
 "BlowExo\BlowExo.axf" - 0 Error(s), 9 Warning(s).
 
@@ -74,7 +74,7 @@ Package Vendor: Keil
 
    * Component: ARM::CMSIS:CORE:5.5.0
       Include file:  CMSIS\Core\Include\tz_context.h
-Build Time Elapsed:  00:00:03
+Build Time Elapsed:  00:00:02
 </pre>
 </body>
 </html>

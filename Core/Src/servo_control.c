@@ -1,5 +1,5 @@
 #include "servo_control.h"
-
+#include "pid_control.h"
 uint8_t servo_send_buf[SERVO_SEND_LEN] = {0};           // 伺服接收缓存
 uint8_t servo_recv_buf[SERVO_RECV_LEN] = {0};           // 伺服发送缓存
 
@@ -19,6 +19,8 @@ uint8_t servo_error = 0;    // 伺服错误
 */
 void Servo_Init(MOTOR_send *pData, MOTOR_recv *rData)
 {
+  // 初始化PID
+  Init_PID(&pid);
   // 获取电机信息
   Motor_Control(&cmd, 0, 0, 0.0);
   Motor_Send_Recv(pData, rData);
@@ -107,7 +109,7 @@ void Motor_Send_Recv(MOTOR_send *pData, MOTOR_recv *rData)
 void Get_Servo_Information()
 {
   // 获取电机信息
-//  Motor_Control(&cmd, 1, 0, 0.0);
+  Motor_Control(&cmd, 1, 0, 0.0);
   Motor_Send_Recv(&cmd, &data);
   // 获取编码器信息
   Encoder_Send_Recv(encoder_recv_buf);

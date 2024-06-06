@@ -38,5 +38,8 @@ blowexo\go-m8010-6.o: ../Core/Inc/motor_control.h
 blowexo\go-m8010-6.o: ../Core/Inc/main.h
 blowexo\go-m8010-6.o: ../Core/Inc/ris_protocol.h
 blowexo\go-m8010-6.o: ../Core/Inc/RLS_encoder.h
+blowexo\go-m8010-6.o: ../Core/Inc/pid_control.h
+blowexo\go-m8010-6.o: ../Core/Inc/servo_control.h
+blowexo\go-m8010-6.o: ../Core/Inc/usart.h
 blowexo\go-m8010-6.o: ../Core/Inc/crc_ccitt.h
 blowexo\go-m8010-6.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h

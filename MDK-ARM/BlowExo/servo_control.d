@@ -38,4 +38,6 @@ blowexo\servo_control.o: ../Core/Inc/motor_control.h
 blowexo\servo_control.o: ../Core/Inc/main.h
 blowexo\servo_control.o: ../Core/Inc/ris_protocol.h
 blowexo\servo_control.o: ../Core/Inc/RLS_encoder.h
+blowexo\servo_control.o: ../Core/Inc/pid_control.h
+blowexo\servo_control.o: ../Core/Inc/servo_control.h
 blowexo\servo_control.o: ../Core/Inc/usart.h

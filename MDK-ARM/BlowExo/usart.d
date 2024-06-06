@@ -38,4 +38,7 @@ blowexo\usart.o: ../Core/Inc/motor_control.h
 blowexo\usart.o: ../Core/Inc/main.h
 blowexo\usart.o: ../Core/Inc/ris_protocol.h
 blowexo\usart.o: ../Core/Inc/RLS_encoder.h
+blowexo\usart.o: ../Core/Inc/pid_control.h
+blowexo\usart.o: ../Core/Inc/servo_control.h
+blowexo\usart.o: ../Core/Inc/usart.h
 blowexo\usart.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h

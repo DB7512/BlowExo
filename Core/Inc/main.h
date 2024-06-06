@@ -33,6 +33,8 @@ extern "C" {
 /* USER CODE BEGIN Includes */
 #include "motor_control.h"
 #include "RLS_encoder.h"
+#include "pid_control.h"
+#include "servo_control.h"
 /* USER CODE END Includes */
 
 /* Exported types ------------------------------------------------------------*/
@@ -73,6 +75,7 @@ void Error_Handler(void);
 
 extern MOTOR_send cmd;
 extern MOTOR_recv data;
+
 //extern uint8_t encoder_recv_buf[ENCODER_RECV_LEN];
 
 
@@ -85,7 +88,6 @@ extern int motor_sta;          // 电机状态，0：停止，1：运动
 extern int motor_data_sta;     // 电机参数解析状态，即motor_r->correct的全局变量
 extern int rls_error_count;    // 编码器错误次数，累积到10次报错
 
-void Servo_Inquire(float* position, float* speed);
 /* USER CODE END Private defines */
 
 #ifdef __cplusplus
